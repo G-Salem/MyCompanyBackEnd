@@ -48,11 +48,11 @@ app.get("/users/registerNumbers/:MatFiscale(*)", (req, res) => {
     const { MatFiscale } = req.params;
     let user = `select * from "SaiUsers" WHERE "MatFiscale" ='${MatFiscale}'`
     pool.query(user, (err, result) => {
-        if ((err) || (result.rowCount == 0)) {
+        if ((err) || (result.fields == null)) {
             res.status(400).send();
         }
         else {
-            res.json(result.fields).send();
+            res.json(result.rows).send();
         }
 
     });
